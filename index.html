@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FURIA FanBot 🐆</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Oxanium:wght@600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --furia-black: #000000;
+            --furia-white: #FFFFFF;
+            --furia-gray: #222222;
+            --furia-light-gray: #EEEEEE;
+            --furia-accent: #555555;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--furia-black);
+            color: var(--furia-white);
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--furia-accent);
+        }
+        
+        .header {
+            background: var(--furia-black);
+            color: var(--furia-white);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--furia-accent);
+            position: relative;
+        }
+        
+        .header h1 {
+            font-family: 'Oxanium', sans-serif;
+            margin: 0;
+            font-size: 2.2rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 700;
+        }
+        
+        .header p {
+            margin: 5px 0 0;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .chat-container {
+            background: var(--furia-black);
+            height: 500px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .chat-box {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            background: var(--furia-black);
+        }
+        
+        .message {
+            margin-bottom: 15px;
+            max-width: 80%;
+            padding: 12px 18px;
+            border-radius: 18px;
+            line-height: 1.4;
+            position: relative;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .user-message {
+            background: var(--furia-gray);
+            margin-left: auto;
+            border-bottom-right-radius: 5px;
+            color: var(--furia-white);
+            border: 1px solid var(--furia-accent);
+        }
+        
+        .bot-message {
+            background: var(--furia-gray);
+            margin-right: auto;
+            border-bottom-left-radius: 5px;
+            color: var(--furia-white);
+            border-left: 3px solid var(--furia-white);
+        }
+        
+        .input-area {
+            display: flex;
+            padding: 15px;
+            background: var(--furia-black);
+            border-top: 1px solid var(--furia-accent);
+        }
+        
+        #userInput {
+            flex: 1;
+            padding: 12px 15px;
+            border: 1px solid var(--furia-accent);
+            border-radius: 25px;
+            background: var(--furia-gray);
+            color: var(--furia-white);
+            font-family: 'Montserrat', sans-serif;
+            outline: none;
+        }
+        
+        #userInput:focus {
+            border-color: var(--furia-white);
+        }
+        
+        #sendButton {
+            background: var(--furia-white);
+            color: var(--furia-black);
+            border: none;
+            padding: 0 25px;
+            margin-left: 10px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+        
+        #sendButton:hover {
+            background: var(--furia-light-gray);
+        }
+        
+        .timestamp {
+            display: block;
+            font-size: 0.7rem;
+            opacity: 0.6;
+            margin-top: 5px;
+            text-align: right;
+        }
+        
+        .chat-box::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        .chat-box::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        .chat-box::-webkit-scrollbar-thumb {
+            background: var(--furia-accent);
+            border-radius: 4px;
+        }
+        
+        a {
+            color: var(--furia-white);
+            text-decoration: underline;
+        }
+        
+        strong {
+            color: var(--furia-white);
+            font-weight: 700;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                margin: 0;
+                border-radius: 0;
+                height: 100vh;
+            }
+            
+            .message {
+                max-width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>FURIA FANBOT</h1>
+            <p>Seu assistente virtual para tudo sobre o time</p>
+        </div>
+        
+        <div class="chat-container">
+            <div class="chat-box" id="chatBox">
+                <div class="bot-message message">
+                    <strong>FURIAaaaaa! ⚡</strong><br><br>
+                    Sou seu assistente virtual da FURIA Esports!<br><br>
+                    Posso te contar sobre resultados, jogadores, próximos jogos e muito mais!<br>
+                    Digite <strong>ajuda</strong> para ver todas opções.
+                    <span class="timestamp">agora</span>
+                </div>
+            </div>
+            
+            <div class="input-area">
+                <input type="text" id="userInput" placeholder="Digite sua mensagem..." autocomplete="off">
+                <button id="sendButton">Enviar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Respostas adaptadas para o tema preto e branco
+        const responses = {
+            "oi": `<strong>FURIAaaaaa! ⚡</strong><br><br>Qual a boa, fúria da massa? Quer saber:<br>
+                  • <strong>Resultados</strong> dos últimos jogos<br>
+                  • <strong>Próximas partidas</strong> do time<br>
+                  • <strong>Estatísticas</strong> dos jogadores<br>
+                  • <strong>Notícias</strong> quentinhas?<br><br>
+                  Me diga o que você quer saber!`,
+                  
+            "ajuda": `<strong>COMANDOS DISPONÍVEIS:</strong><br><br>
+                      • <strong>resultados</strong> - Últimos jogos<br>
+                      • <strong>próximos jogos</strong> - Calendário<br>
+                      • <strong>notícias</strong> - Novidades do time<br>
+                      • <strong>elenco</strong> - Jogadores e stats<br>
+                      • <strong>loja</strong> - Merchandising FURIA<br>
+                      • <strong>memes</strong> - Melhores memes<br>
+                      • <strong>art/fallen/kscerato</strong> - Info específica`,
+                      
+            "resultados": `<strong>ÚLTIMOS RESULTADOS:</strong><br><br>
+                          <em>IEM Dallas 2024</em><br>
+                          ✅ FURIA 2-1 NAVI<br>
+                          • Inferno: <strong>16-14</strong> (KSCERATO: 27 kills)<br>
+                          • Mirage: <strong>10-16</strong><br>
+                          • Ancient: <strong>16-12</strong> (arT: 1v3 clutch)<br><br>
+                          Próximo jogo: vs Vitality em 15/06`,
+                          
+            "próximos jogos": `<strong>PRÓXIMOS JOGOS:</strong><br><br>
+                               <strong>15/06</strong> - vs Vitality (BLAST Premier)<br>
+                               <strong>20/06</strong> - vs FaZe Clan (ESL Pro League)<br>
+                               <strong>25/06</strong> - vs NIP (BLAST Groups)<br><br>
+                               ⏰ Todos às 16h (horário de Brasília)`,
+                               
+            "notícias": `<strong>ÚLTIMAS NOTÍCIAS:</strong><br><br>
+                         <strong>FalleN confirmado como novo IGL!</strong><br>
+                         • Substitui saz após 2 meses<br>
+                         • KSCERATO mantém liderança em kills (1.25 rating)<br><br>
+                         🎥 <a href="#">Assista à coletiva</a>`,
+                         
+            "elenco": `<strong>ELENCO ATUAL:</strong><br><br>
+                       <strong>KSCERATO</strong> - Rifler (1.25 rating)<br>
+                       <strong>yuurih</strong> - Rifler (1.18 rating)<br>
+                       <strong>FalleN</strong> - IGL/AWP (1.05 rating)<br>
+                       <strong>chelo</strong> - Support (1.12 rating)<br>
+                       <strong>arT</strong> - Entry Fragger (0.98 rating, 1.35 impact)<br><br>
+                       <em>Técnico:</em> guerri`,
+                       
+            "loja": `<strong>LOJA OFICIAL FURIA:</strong><br><br>
+                     Camisetas, moletons e acessórios exclusivos!<br>
+                     Use o código <strong>FURIAFAN10</strong> para 10% OFF<br><br>
+                     👉 <a href="https://shop.furia.gg" target="_blank">Visitar Loja</a>`,
+                     
+            "memes": `<strong>MEME DO DIA:</strong><br><br>
+                     <em>"arT não joga CS, joga arT"</em><br>
+                     Imagem do arT rushando A de pistola contra 5 AWPs<br><br>
+                     Digite <strong>outro meme</strong> para mais!`,
+                     
+            "outro meme": `<strong>MEME CLÁSSICO:</strong><br><br>
+                           <em>"VAMO PORRADA!"</em><br>
+                           Guerri motivando o time no Major Antwerp<br><br>
+                           <a href="#">Ver vídeo</a>`,
+                           
+            "art": `<strong>ANDREI "arT" PIOLI</strong><br><br>
+                    • Idade: 27 anos<br>
+                    • Função: Entry Fragger<br>
+                    • Estilo: "Rushar tudo que se mexe"<br>
+                    • Famoso por: Jogadas agressivas e clutches impossíveis`,
+                    
+            "fallen": `<strong>GABRIEL "FalleN" TOLEDO</strong><br><br>
+                      • Lenda do CS brasileiro<br>
+                      • 2x Campeão de Major<br>
+                      • Agora IGL da FURIA<br>
+                      • Dono da <a href="#">Games Academy</a>`,
+                      
+            "kscerato": `<strong>KAIQUE "KSCERATO" CERATO</strong><br><br>
+                        • Melhor jogador da FURIA<br>
+                        • Rating nos últimos 3 meses: <strong>1.25</strong><br>
+                        • 85% HS em Mirage<br>
+                        • Apelido: "O Ceratops"`
+        };
+
+        function getCurrentTime() {
+            const now = new Date();
+            return now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+        }
+
+        function sendMessage() {
+            const userInput = document.getElementById('userInput').value.toLowerCase();
+            const chatBox = document.getElementById('chatBox');
+            
+            if (userInput.trim() === '') return;
+            
+            chatBox.innerHTML += `
+                <div class="user-message message">
+                    ${userInput}
+                    <span class="timestamp">${getCurrentTime()}</span>
+                </div>
+            `;
+            
+            let response = responses[userInput] || `
+                <strong>FURIA mode on!</strong> Não entendi, fúria da massa!<br>
+                Digite <strong>ajuda</strong> para ver todas opções disponíveis.
+            `;
+            
+            chatBox.innerHTML += `
+                <div class="bot-message message">
+                    ${response}
+                    <span class="timestamp">${getCurrentTime()}</span>
+                </div>
+            `;
+            
+            document.getElementById('userInput').value = '';
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        document.getElementById('sendButton').addEventListener('click', sendMessage);
+        
+        document.getElementById('userInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
