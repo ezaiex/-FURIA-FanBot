@@ -1,4 +1,4 @@
-# 🐆 FURIA FanBot
+# 🐆 FURIA CHATBOT
 
 ![Preview](assets/screenshot.png)
 
