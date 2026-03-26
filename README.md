@@ -1,4 +1,4 @@
-# 🐆 FURIA CHATBOT
+# 🐆 Furia Chat Bot
 
 ![Preview](assets/screenshot.png)
 
