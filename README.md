@@ -32,11 +32,5 @@ open index.html
 - CSS3
 - JavaScript Vanilla
 
-## 📸 Screenshot
-![Interface do Chatbot](assets/screenshot.png)
-
-## 📺 Vídeo Demonstrativo
-[Assistir vídeo](video-demo.mp4)
-
 ## 📝 Licença
 Este projeto está sob licença MIT. Veja o arquivo [LICENSE](LICENSE) para detalhes.
